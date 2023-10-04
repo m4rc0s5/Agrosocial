@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "790309221565",
+    "project_id": "agrosocial-78503",
+    "storage_bucket": "agrosocial-78503.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:790309221565:android:721578f40fcbb20a2cb3d4",
+        "android_client_info": {
+          "package_name": "com.marcos.longhini.agrosocial"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLxhbi-hWMonPTAZTB0B8eOseMJC6PcXk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
