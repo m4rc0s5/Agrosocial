@@ -14,10 +14,10 @@
         android:theme="@style/Theme.Agrosocial"
         tools:targetApi="31">
         <activity
-            android:name=".Bem_vindo"
+            android:name=".Tela_entrada"
             android:exported="false" />
         <activity
-            android:name=".NovamensagemActivity"
+            android:name=".Bem_vindo"
             android:exported="false" />
         <activity
             android:name=".TimelineActivity"

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Tela_entrada">
+
+    <Button
+        android:id="@+id/botão_cadastro"
+        android:layout_width="192dp"
+        android:layout_height="68dp"
+        android:text="Cadastro"
+        app:backgroundTint="#FFC107"
+        tools:layout_editor_absoluteX="123dp"
+        tools:layout_editor_absoluteY="226dp"
+        android:textColor = "@color/Green_dark"/>
+
+    <Button
+        android:id="@+id/botão_cadastro2"
+        android:layout_width="166dp"
+        android:layout_height="74dp"
+        app:backgroundTint="#FFC107"
+        android:textColor = "@color/Green_dark"
+        android:text="Login"
+
+        tools:layout_editor_absoluteX="137dp"
+        tools:layout_editor_absoluteY="433dp" />
+
+
+
+
+ <androidx.constraintlayout.widget.ConstraintLayout/>
+
