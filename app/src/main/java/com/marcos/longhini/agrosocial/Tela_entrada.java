@@ -16,7 +16,7 @@ public class Tela_entrada extends AppCompatActivity {
     }
 
     public void Login(View view) {
-        Intent intent = new Intent(Tela_entrada.this,Login.class);
+        Intent intent = new Intent(Tela_entrada.this, LoginActivity.class);
         startActivity(intent);
 
     }

@@ -9,7 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
-public class Login extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +23,7 @@ public class Login extends AppCompatActivity {
         String emailStr = email.getText().toString();
         String SenhaStr = senha.getText().toString();
         if (emailStr.isEmpty() || SenhaStr.isEmpty()) {
-            Ferramentas.mensagem_Tela(Login.this,"Não é permitido campos em branco!");
+            Ferramentas.mensagem_Tela(LoginActivity.this,"Não é permitido campos em branco!");
 
                 return;
         }
@@ -35,12 +35,12 @@ public class Login extends AppCompatActivity {
         String emailsp = sharedPreferences.getString("key_email","");
         String senhasp = sharedPreferences.getString("key_senha","");
         if(emailsp.equals(emailStr)&& senhasp.equals(SenhaStr)){
-            Intent intent = new Intent(Login.this,TimelineActivity.class);
+            Intent intent = new Intent(LoginActivity.this,TimelineActivity.class);
             startActivity(intent);
 
         }
         else {
-            Ferramentas.mensagem_Tela(Login.this,"Usuario ou senha incorretos!!");
+            Ferramentas.mensagem_Tela(LoginActivity.this,"Usuario ou senha incorretos!!");
         }
     }
 }

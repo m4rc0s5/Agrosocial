@@ -79,6 +79,8 @@ public class CadastroActivity extends AppCompatActivity {
 
 // Apply the changes
         editor.apply();
+        Ferramentas.mensagem_Tela(CadastroActivity.this,"Cadastro realizado com sucesso");
+        onBackPressed();
     }
     public void tirarfoto(View view) {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);

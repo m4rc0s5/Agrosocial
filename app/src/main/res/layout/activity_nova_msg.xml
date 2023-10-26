@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="16dp"
+    android:orientation="vertical"
+    tools:context=".NovaMsgActivity">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text = "Área_Agricola"
+        android:textSize= "20sp"></TextView>
+    <Spinner
+        android:id = "@+id/spArea"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></Spinner>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text = "Digite sua mensagem"
+        android:textSize= "20sp"></TextView>
+
+    <EditText
+        android:id = "@+id/txtMensagem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:lines = "20"
+        android:inputType = "textMultiLine"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:text = "Enviar Mensagem"
+        android:onClick = "enviarClick"
+        android:textSize= "20sp"/>
+
+</LinearLayout>

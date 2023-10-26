@@ -14,21 +14,19 @@
         android:text="Cadastro"
         android:onClick =  "Cadastro"
         app:backgroundTint="#FFC107"
-        tools:layout_editor_absoluteX="123dp"
-        tools:layout_editor_absoluteY="226dp"
+
         android:textColor = "@color/green_dark"/>
 
     <Button
         android:id="@+id/botão_Login"
-        android:layout_width="166dp"
-        android:layout_height="74dp"
+        android:layout_width="167dp"
+        android:layout_height="75dp"
         app:backgroundTint="#FFC107"
         android:textColor = "@color/green_dark"
         android:text="Login"
         android:onClick =  "Login"
 
-        tools:layout_editor_absoluteX="137dp"
-        tools:layout_editor_absoluteY="433dp" />
+         />
 
 
 
