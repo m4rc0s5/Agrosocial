@@ -78,19 +78,6 @@
         android:text=" " />
 
 
-    <TextView
-        android:id="@+id/Área_AgricolaTitle"
-        android:layout_width="109dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Area_Agricola" />
-
-    <EditText
-        android:id="@+id/AA_Barra"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp" />
-
     <Button
         android:id="@+id/Salvar1"
         android:layout_width="200dp"

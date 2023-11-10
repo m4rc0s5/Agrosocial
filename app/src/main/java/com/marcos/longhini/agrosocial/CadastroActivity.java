@@ -52,13 +52,13 @@ public class CadastroActivity extends AppCompatActivity {
         EditText email = findViewById(R.id.emailbarra);
         EditText senha = findViewById(R.id.Senhabarra);
         EditText telefone = findViewById(R.id.tel_barra);
-        EditText AA = findViewById(R.id.AA_Barra);
+
         String nomeStr = nome.getText().toString();
         String emailStr = email.getText().toString();
         String SenhaStr = senha.getText().toString();
         String TelefoneStr = telefone.getText().toString();
-        String Area_AgricolaStr = AA.getText().toString();
-    if (nomeStr.isEmpty() || emailStr.isEmpty() || SenhaStr.isEmpty()|| TelefoneStr.isEmpty() || Area_AgricolaStr.isEmpty() ){
+
+    if (nomeStr.isEmpty() || emailStr.isEmpty() || SenhaStr.isEmpty()|| TelefoneStr.isEmpty() ){
         Ferramentas.mensagem_Tela(CadastroActivity.this,"Não é permitido campos em branco!");
 
         return;
@@ -75,7 +75,6 @@ public class CadastroActivity extends AppCompatActivity {
         editor.putString("key_email",emailStr);
         editor.putString("key_senha",SenhaStr);
         editor.putString("key_telefone",TelefoneStr);
-        editor.putString("key_aa", Area_AgricolaStr);
 
 // Apply the changes
         editor.apply();
