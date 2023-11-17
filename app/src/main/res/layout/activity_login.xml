@@ -19,6 +19,7 @@
     <EditText
         android:id="@+id/emailbarra"
         android:layout_width="200dp"
+        android:inputType="textEmailAddress"
         android:layout_height="wrap_content" />
 
     <TextView
@@ -31,8 +32,15 @@
     <EditText
         android:id="@+id/Senhabarra"
         android:layout_width="200dp"
+        android:inputType="numberPassword"
         android:layout_height="wrap_content"
-        android:text=" " />
+        android:text="" />
+
+    <CheckBox
+        android:id="@+id/lembrarLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lembrar credencial"/>
 
 
     <Button

@@ -4,10 +4,16 @@
     tools:context=".MainActivity">
 
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/action_out"
         android:orderInCategory="80"
-        android:title="configurações"
-        android:icon="@drawable/ic_settings"
+        android:title="Logout"
+        android:iconTint="@color/white"
         app:showAsAction="ifRoom" />
 
+    <item
+        android:id="@+id/action_exit"
+        android:orderInCategory="85"
+        android:title="Sair"
+        android:iconTint="@color/white"
+        app:showAsAction="ifRoom" />
 </menu>

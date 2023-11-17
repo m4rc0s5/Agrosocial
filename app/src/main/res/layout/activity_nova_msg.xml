@@ -13,23 +13,27 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text = "Área_Agricola"
-        android:textSize= "20sp"></TextView>
+        android:textSize= "20sp"/>
+
     <Spinner
         android:id = "@+id/spArea"
+        android:backgroundTint="@color/green_dark"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></Spinner>
+        android:layout_height="wrap_content"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text = "Digite sua mensagem"
-        android:textSize= "20sp"></TextView>
+        android:textSize= "20sp"/>
 
     <EditText
         android:id = "@+id/txtMensagem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:lines = "20"
+        android:background="#EEFFEE"
+        android:hint="Digite aqui ..."
         android:inputType = "textMultiLine"/>
 
     <Button

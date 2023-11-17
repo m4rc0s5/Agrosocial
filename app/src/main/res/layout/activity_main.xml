@@ -8,16 +8,25 @@
     tools:context=".MainActivity">
 
     <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="eventoclick"></Button>
+        android:id="@+id/botão_cadastro"
+        android:layout_width="192dp"
+        android:layout_height="68dp"
+        android:text="Cadastro"
+        android:onClick =  "Cadastro"
+        app:backgroundTint="#FFC107"
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!">
+        android:textColor = "@color/green_dark"/>
 
-    </TextView>
+    <Button
+        android:id="@+id/botão_Login"
+        android:layout_width="167dp"
+        android:layout_height="75dp"
+        app:backgroundTint="#FFC107"
+        android:textColor = "@color/green_dark"
+        android:text="Login"
+        android:onClick =  "Login"
+
+        />
 
 
 </LinearLayout>
