@@ -17,21 +17,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import android.content.DialogInterface;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -40,14 +27,23 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //verifica se o login é automatico
-        SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
-        boolean auto = sharedPreferences.getBoolean("key_login", false);
-        if (auto == true) {
-            Intent intent = new Intent(MainActivity.this, TimelineActivity.class);
-            startActivity(intent);
+        // Verifica conectividade
+        if (Ferramentas.isNetworkAvailable(this)) {
+
+            //verifica se o login é automatico
+            SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+            boolean auto = sharedPreferences.getBoolean("key_login", false);
+            if (auto == true) {
+                Intent intent = new Intent(MainActivity.this, TimelineActivity.class);
+                startActivity(intent);
+            }
+
+        } else {
+            // Mostra alerta sem internet
+            showNoInternetAlert();
         }
     }
+
 
 
     public void Login(View view) {
@@ -110,6 +106,22 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         dialog.show();
+    }
+
+    private void showNoInternetAlert() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setTitle("Sem conexão com a internet :(");
+        builder.setMessage("Por favor verifique sua conexão com a internet e tente novamente.");
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Close the app or take any other action
+                finishAffinity();
+            }
+        });
+
+        builder.setCancelable(false);
+        builder.show();
     }
 
 }

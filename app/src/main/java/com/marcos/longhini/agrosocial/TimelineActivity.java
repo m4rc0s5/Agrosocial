@@ -1,5 +1,7 @@
 package com.marcos.longhini.agrosocial;
 
+import static androidx.core.app.ActivityCompat.finishAffinity;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -65,9 +67,15 @@ public class TimelineActivity extends AppCompatActivity {
 
         expandableListView = findViewById(R.id.expListView);
 
-        prepareListAreas();
-
+        // Verifica conectividade
+        if (Ferramentas.isNetworkAvailable(this)) {
+            prepareListAreas();
+        } else {
+            // Mostra alerta sem internet
+            showNoInternetAlert();
+        }
     }
+
 
     private void prepareListAreas() {
         listDataHeader = new ArrayList<>();
@@ -219,6 +227,22 @@ public class TimelineActivity extends AppCompatActivity {
         });
         alert.show();
 
+    }
+
+    private void showNoInternetAlert() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(TimelineActivity.this);
+        builder.setTitle("Sem conexão com a internet :(");
+        builder.setMessage("Por favor verifique sua conexão com a internet e tente novamente.");
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Close the app or take any other action
+                finishAffinity();
+            }
+        });
+
+        builder.setCancelable(false);
+        builder.show();
     }
 
 }

@@ -1,9 +1,11 @@
 package com.marcos.longhini.agrosocial;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -70,8 +72,15 @@ public class NovaMsgActivity extends AppCompatActivity {
         dataList = new ArrayList<>();
         adapter = new ArrayAdapter(this, R.layout.simple_list_item, dataList);
         spinner.setAdapter(adapter);
-        //popular o spinner
-        carregaSpinner();
+
+        if (Ferramentas.isNetworkAvailable(this)) {
+            //popular o spinner
+            carregaSpinner();
+        } else {
+            // Mostra alerta sem internet
+            showNoInternetAlert();
+        }
+
     }
 
     private void carregaSpinner() {
@@ -153,5 +162,21 @@ public class NovaMsgActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void showNoInternetAlert() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(NovaMsgActivity.this);
+        builder.setTitle("Sem conexão com a internet :(");
+        builder.setMessage("Por favor verifique sua conexão com a internet e tente novamente.");
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Close the app or take any other action
+                finishAffinity();
+            }
+        });
+
+        builder.setCancelable(false);
+        builder.show();
     }
 }
