@@ -1,0 +1,25 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity">
+
+    <item
+        android:id="@+id/action_msg"
+        android:orderInCategory="80"
+        android:title="Enviar mensagem"
+        android:icon="@drawable/ic_send"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_msg2"
+        android:orderInCategory="90"
+        android:title="Enviar mensagem"
+        app:showAsAction="withText" />
+
+    <item
+        android:id="@+id/action_back"
+        android:orderInCategory="100"
+        android:title="Voltar"
+        app:showAsAction="withText" />
+
+</menu>

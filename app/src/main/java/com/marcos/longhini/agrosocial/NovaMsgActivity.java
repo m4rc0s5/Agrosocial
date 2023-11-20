@@ -6,8 +6,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
@@ -54,20 +58,15 @@ public class NovaMsgActivity extends AppCompatActivity {
         telefone = sharedPreferences.getString("key_telefone", "anônimo");
         imagemBase64 = sharedPreferences.getString("key_imagem", "null");
 
-        /*
-        if (!imagemBase64.isEmpty()) {
-            // Convert the Base64 string to a Bitmap
-            Bitmap bitmap = Ferramentas.decodeFromBase64(imagemBase64);
-
-            // Set the Bitmap to the ImageView
-            ImageView imgView = new ImageView(this);
-            imgView.setImageBitmap(bitmap);
-            int width = imgView.getDrawable().getIntrinsicWidth();
-            int height = imgView.getDrawable().getIntrinsicHeight();
-            Ferramentas.mensagem_Tela(this, width + "x" + height + " = " + bitmap.getRowBytes() * bitmap.getHeight());
-        }
-         */
-
+        //if (!imagemBase64.equals("null")) {
+        //    Drawable drawable = getResources().getDrawable(R.drawable.ic_icone);
+        //    if (drawable instanceof BitmapDrawable) {
+        //        // Converte imagem Drawable para Bitmap
+        //        Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
+        //        // Converte  Bitmap em string Base64
+       //         imagemBase64 = Ferramentas.encodeToBase64(bitmap);
+       //     }
+        //}
         dataList = new ArrayList<>();
         adapter = new ArrayAdapter(this, R.layout.simple_list_item, dataList);
         spinner.setAdapter(adapter);
@@ -97,7 +96,7 @@ public class NovaMsgActivity extends AppCompatActivity {
         });
     }
 
-    public void enviarClick(View view) {
+    public void enviarClick() {
         //mandar para o Firebase
         String area = spinner.getSelectedItem().toString();
         String mensagem = txtMsg.getText().toString();
@@ -132,6 +131,27 @@ public class NovaMsgActivity extends AppCompatActivity {
                 Ferramentas.mensagem_Tela(NovaMsgActivity.this, "Erro " + e.getMessage());
             }
         });
+    }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.msg_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_msg) {
+            enviarClick();
+            return true;
+        } else if (id == R.id.action_msg2) {
+            enviarClick();
+            return true;
+        } else if (id == R.id.action_back) {
+            onBackPressed();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

@@ -5,42 +5,41 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="16dp"
+    android:background="@color/white"
     android:orientation="vertical"
     tools:context=".NovaMsgActivity">
 
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text = "Área_Agricola"
-        android:textSize= "20sp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Selecionar Área Agricola"
+            android:textSize="20sp" />
 
-    <Spinner
-        android:id = "@+id/spArea"
-        android:backgroundTint="@color/green_dark"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        <Spinner
+            android:id="@+id/spArea"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/green_dark" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text = "Digite sua mensagem"
-        android:textSize= "20sp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Digite sua mensagem"
+            android:layout_marginTop="20dp"
+            android:textSize="20sp" />
 
-    <EditText
-        android:id = "@+id/txtMensagem"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:lines = "20"
-        android:background="#EEFFEE"
-        android:hint="Digite aqui ..."
-        android:inputType = "textMultiLine"/>
+        <EditText
+            android:id="@+id/txtMensagem"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#EEFFEE"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/black"
+            android:hint="Digite aqui ..."
+            android:inputType="textMultiLine"
+            />
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:text = "Enviar Mensagem"
-        android:onClick = "enviarClick"
-        android:textSize= "20sp"/>
 
 </LinearLayout>

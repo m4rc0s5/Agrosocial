@@ -4,11 +4,19 @@
     tools:context=".MainActivity">
 
     <item
+        android:id="@+id/action_sync"
+        android:orderInCategory="70"
+        android:title="Atualizar"
+        android:iconTint="@color/white"
+        android:icon="@drawable/ic_sync"
+        app:showAsAction="ifRoom" />
+
+    <item
         android:id="@+id/action_out"
         android:orderInCategory="80"
         android:title="Logout"
         android:iconTint="@color/white"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="withText" />
 
     <item
         android:id="@+id/action_exit"

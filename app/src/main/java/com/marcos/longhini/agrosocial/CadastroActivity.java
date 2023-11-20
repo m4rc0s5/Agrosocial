@@ -25,6 +25,7 @@ public class CadastroActivity extends AppCompatActivity {
     ActivityResultLauncher<Intent> launcher;
     private ImageView imageView;
     private EditText nome, email,senha,telefone;
+    boolean carregouImagem = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +48,7 @@ public class CadastroActivity extends AppCompatActivity {
                         Bundle extras = data.getExtras();
                         Bitmap imageBitmap = (Bitmap) extras.get("data");
                         imageView.setImageBitmap(imageBitmap);
+                        carregouImagem = true;
                     }
                 }
         );
@@ -75,15 +77,17 @@ public class CadastroActivity extends AppCompatActivity {
         editor.putString("key_senha", SenhaStr.trim());
         editor.putString("key_telefone", TelefoneStr.trim());
 
-        Drawable drawable = imageView.getDrawable();
+        if (carregouImagem == true) {
+            Drawable drawable = imageView.getDrawable();
 
-        if (drawable instanceof BitmapDrawable) {
-            // Converte imagem Drawable para Bitmap
-            Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
-            // Converte  Bitmap em string Base64
-            String encodedImage = Ferramentas.encodeToBase64(bitmap);
-            // Salva string Base64 nas SharedPreferences
-            editor.putString("key_imagem", encodedImage);
+            if (drawable instanceof BitmapDrawable) {
+                // Converte imagem Drawable para Bitmap
+                Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
+                // Converte  Bitmap em string Base64
+                String encodedImage = Ferramentas.encodeToBase64(bitmap);
+                // Salva string Base64 nas SharedPreferences
+                editor.putString("key_imagem", encodedImage);
+            }
         }
 
         editor.apply();

@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <TextView
@@ -58,7 +59,7 @@
             android:textSize="18sp"
             android:textColor="#FFF"
             android:layout_marginLeft="10dp"
-            android:text="Acessar" />
+            android:text="Entrar" />
     </LinearLayout>
 
 </LinearLayout>

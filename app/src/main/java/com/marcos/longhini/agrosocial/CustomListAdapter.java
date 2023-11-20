@@ -53,9 +53,10 @@ public class CustomListAdapter extends BaseExpandableListAdapter {
         txtChildDt.setText(childItem.getDt());
         txtChildMessage.setText(childItem.getMensagem());
         String img64 = childItem.getImagem64();
-
-        Bitmap bmp = Ferramentas.decodeFromBase64(img64);
-        imgChildImage.setImageBitmap(bmp);
+        if (!img64.equals("null")) {
+            Bitmap bmp = Ferramentas.decodeFromBase64(img64);
+            imgChildImage.setImageBitmap(bmp);
+        }
 
         if (childPosition % 2 == 0) {
             convertView.setBackgroundColor(Color.parseColor("#EEFFEE"));

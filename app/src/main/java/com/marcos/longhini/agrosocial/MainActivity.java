@@ -47,36 +47,6 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, TimelineActivity.class);
             startActivity(intent);
         }
-/*
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference dataListRef = database.getReference("area_agricola");
-        dataListRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String strArea = "";
-                for (DataSnapshot areaSnapshot : dataSnapshot.getChildren()) {
-                    String value = areaSnapshot.getValue(String.class);
-                    strArea += value + ";";
-                }
-                String area = strArea.substring(0, strArea.length() - 1);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("key_area", area);
-                editor.apply();
-                Ferramentas.mensagem_Tela(MainActivity.this, area);
-
-                boolean auto = sharedPreferences.getBoolean("key_login", false);
-                if (auto == true) {
-                    Intent intent = new Intent(MainActivity.this, TimelineActivity.class);
-                    startActivity(intent);
-                }
-
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                // Handle error if data retrieval is unsuccessful
-            }
-        });
- */       
     }
 
 

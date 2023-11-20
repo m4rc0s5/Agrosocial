@@ -92,7 +92,7 @@ public class CadastroAreaActivity extends AppCompatActivity {
                         // Data inserted successfully
                         Ferramentas.mensagem_Tela(CadastroAreaActivity.this, "Área inserida com sucesso!");
                         adapter.notifyDataSetChanged();
-
+                        txtAA.setText("");
                     } else {
                         // Handle the error
                         Ferramentas.mensagem_Tela(CadastroAreaActivity.this,"Erro: " + task.getException());

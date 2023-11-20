@@ -72,18 +72,6 @@ public class TimelineActivity extends AppCompatActivity {
     private void prepareListAreas() {
         listDataHeader = new ArrayList<>();
 
-        /*SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
-        String strArea = sharedPreferences.getString("key_area", "null");
-
-        String [] arrayArea = strArea.split(";");
-        for(String area : arrayArea) {
-            listDataHeader.add(area);
-        }
-
-        prepareListData();
-        */
-
-
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference dataListRef = database.getReference("area_agricola");
         dataListRef.addValueEventListener(new ValueEventListener() {
@@ -164,10 +152,14 @@ public class TimelineActivity extends AppCompatActivity {
                         }
                     });
         }
-
-
     }
 
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        prepareListAreas();
+    }
 
     @Override
     public void onBackPressed() {
@@ -184,7 +176,9 @@ public class TimelineActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.action_out) {
+        if (id == R.id.action_sync) {
+            prepareListAreas();
+        } else if (id == R.id.action_out) {
             logout();
         } else if (id == R.id.action_exit) {
             finishAffinity();
