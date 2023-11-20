@@ -12,6 +12,20 @@
         app:showAsAction="ifRoom" />
 
     <item
+        android:id="@+id/action_sync2"
+        android:orderInCategory="72"
+        android:title="Atualizar"
+        android:iconTint="@color/white"
+        app:showAsAction="withText" />
+
+    <item
+        android:id="@+id/action_about"
+        android:orderInCategory="75"
+        android:title="Sobre o app"
+        android:iconTint="@color/white"
+        app:showAsAction="withText" />
+
+    <item
         android:id="@+id/action_out"
         android:orderInCategory="80"
         android:title="Logout"

@@ -178,16 +178,25 @@ public class TimelineActivity extends AppCompatActivity {
         int id = item.getItemId();
         if (id == R.id.action_sync) {
             prepareListAreas();
+            return true;
+        } else if (id == R.id.action_sync2) {
+            prepareListAreas();
+            return true;
         } else if (id == R.id.action_out) {
             logout();
+            return true;
         } else if (id == R.id.action_exit) {
             finishAffinity();
+            return true;
+        } else if (id == R.id.action_about) {
+            Intent intent = new Intent(TimelineActivity.this, SobreActivity.class);
+            startActivity(intent);
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
     private void logout() {
-
         final AlertDialog alert = new AlertDialog.Builder(TimelineActivity.this).create();
         //alert.setTitle("title");
         alert.setMessage("Tem certeza que gostaria de realizar o LOGOUT ?");
