@@ -23,10 +23,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
+            android:fontFamily="@font/algerian_regular"
+            android:gravity="center"
             android:text="@string/app_name"
             android:textColor="@color/green_dark"
-            android:textSize="48sp"
-            android:textStyle="bold" />
+            android:textSize="48sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -39,10 +40,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="2"
-            android:text="Versão"
+            android:text="Versão:"
             android:textColor="@color/black"
-            android:textSize="28sp"
-            android:textStyle="bold" />
+            android:textSize="24sp" />
 
 
         <TextView
@@ -53,16 +53,15 @@
             android:layout_weight="1"
             android:text=""
             android:textColor="@color/black"
-            android:textSize="28sp"
-            android:textStyle="bold" />
+            android:textSize="24sp" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:visibility="gone"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:visibility="gone">
 
         <TextView
             android:layout_width="match_parent"
@@ -70,8 +69,7 @@
             android:layout_weight="2"
             android:text="Code"
             android:textColor="@color/black"
-            android:textSize="28sp"
-            android:textStyle="bold" />
+            android:textSize="28sp" />
 
 
         <TextView
@@ -86,25 +84,23 @@
             android:textStyle="bold" />
     </LinearLayout>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="Contato"
-            android:textColor="@color/black"
-            android:textSize="28sp"
-            android:textStyle="bold" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Contato:"
+        android:textColor="@color/black"
+        android:textSize="24sp" />
 
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="marcoslonghini@mx2.unisc.br"
-            android:textColor="@color/black"
-            android:textSize="24sp"
-            android:autoSizeTextType="uniform"
-            android:textStyle="bold" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:autoSizeTextType="uniform"
+        android:text="marcoslonghini@mx2.unisc.br"
+        android:textColor="@color/black"
+        android:textSize="24sp" />
 
 
 </LinearLayout>

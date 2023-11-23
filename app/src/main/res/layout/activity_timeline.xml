@@ -8,7 +8,18 @@
     android:background="@color/white"
     tools:context=".TimelineActivity">
 
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/algerian_regular"
+        android:text="@string/app_name"
+        android:gravity="center"
+        android:textSize="36sp"
+        android:textColor="@color/black"/>
+
     <ExpandableListView
+        android:layout_marginTop="40dp"
         android:id="@+id/expListView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

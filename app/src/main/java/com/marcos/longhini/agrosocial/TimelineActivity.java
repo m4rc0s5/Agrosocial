@@ -3,6 +3,7 @@ package com.marcos.longhini.agrosocial;
 import static androidx.core.app.ActivityCompat.finishAffinity;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -22,6 +23,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
+import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -74,6 +76,7 @@ public class TimelineActivity extends AppCompatActivity {
             // Mostra alerta sem internet
             showNoInternetAlert();
         }
+
     }
 
 
