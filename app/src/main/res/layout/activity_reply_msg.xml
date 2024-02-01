@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="16dp"
+        android:background="@color/white"
+        android:orientation="vertical"
+        tools:context=".ReplyMsgActivity">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/algerian_regular"
+            android:gravity="center"
+            android:text="@string/app_name"
+            android:textColor="@color/black"
+            android:textSize="36sp" />
+
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Respondendo Área Agricola"
+            android:textSize="20sp" />
+
+
+        <TextView
+            android:id="@+id/txtArea"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#EEFFEE"
+            android:textSize="20sp"
+            android:textColor="@color/green_dark" />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Digite sua mensagem"
+            android:layout_marginTop="20dp"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/txtMensagem"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#EEFFEE"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/black"
+            android:hint="Digite aqui ..."
+            android:inputType="textMultiLine"
+            />
+
+
+    </LinearLayout>

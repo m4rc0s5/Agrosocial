@@ -55,7 +55,6 @@
         <ImageButton
             android:id="@+id/btnReply"
             android:backgroundTint="#0FFF"
-            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_gravity="center"
             android:layout_height="match_parent"

@@ -8,21 +8,13 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -41,20 +33,25 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class NovaMsgActivity extends AppCompatActivity {
-    private Spinner spinner;
+public class ReplyMsgActivity extends AppCompatActivity {
+
+    private TextView txtArea;
     private EditText txtMsg;
     private ArrayAdapter adapter;
     private List<String> dataList;
-    private String nome, email, telefone, imagemBase64;
+    private String nome, email, telefone, imagemBase64, headerName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_nova_msg);
+        setContentView(R.layout.activity_reply_msg);
 
         txtMsg = findViewById(R.id.txtMensagem);
-        spinner = findViewById(R.id.spArea);
+        txtArea = findViewById(R.id.txtArea);
+
+        Intent intent = getIntent();
+        headerName = intent.getStringExtra("header");
+        txtArea.setText(headerName);
 
         SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
 
@@ -65,15 +62,6 @@ public class NovaMsgActivity extends AppCompatActivity {
 
         dataList = new ArrayList<>();
         adapter = new ArrayAdapter(this, R.layout.simple_list_item, dataList);
-        spinner.setAdapter(adapter);
-
-        if (Ferramentas.isNetworkAvailable(this)) {
-            //popular o spinner
-            carregaSpinner();
-        } else {
-            // Mostra alerta sem internet
-            showNoInternetAlert();
-        }
 
     }
 
@@ -101,11 +89,10 @@ public class NovaMsgActivity extends AppCompatActivity {
 
     public void enviarClick() {
         //mandar para o Firebase
-        String area = spinner.getSelectedItem().toString();
         String mensagem = txtMsg.getText().toString();
 
         if (mensagem.isEmpty()) {
-            Ferramentas.mensagem_Tela(NovaMsgActivity.this, "Não é permitido campo em branco!");
+            Ferramentas.mensagem_Tela(ReplyMsgActivity.this, "Não é permitido campo em branco!");
             return;
         }
 
@@ -113,7 +100,7 @@ public class NovaMsgActivity extends AppCompatActivity {
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy  HH:mm:ss");
         String strDate = sdf.format(c);
 
-        FirebaseFirestore  db = FirebaseFirestore.getInstance();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
         Map<String, String> mapa = new HashMap<>();
         mapa.put("data", strDate );
         mapa.put("mensagem",mensagem);
@@ -122,16 +109,17 @@ public class NovaMsgActivity extends AppCompatActivity {
         mapa.put("email", email);
         mapa.put("telefone", telefone);
         mapa.put("imagem", imagemBase64);
-        db.collection(area).document().set(mapa).addOnSuccessListener(new OnSuccessListener<Void>() {
+        db.collection(headerName).document().set(mapa).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
-                Ferramentas.mensagem_Tela(NovaMsgActivity.this, "Mensagem enviada!");
+                Ferramentas.mensagem_Tela(ReplyMsgActivity.this, "Mensagem enviada!");
                 txtMsg.setText("");
+                onBackPressed();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Ferramentas.mensagem_Tela(NovaMsgActivity.this, "Erro " + e.getMessage());
+                Ferramentas.mensagem_Tela(ReplyMsgActivity.this, "Erro " + e.getMessage());
             }
         });
     }
@@ -159,7 +147,7 @@ public class NovaMsgActivity extends AppCompatActivity {
     }
 
     private void showNoInternetAlert() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(NovaMsgActivity.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(ReplyMsgActivity.this);
         builder.setTitle("Sem conexão com a internet :(");
         builder.setMessage("Por favor verifique sua conexão com a internet e tente novamente.");
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
