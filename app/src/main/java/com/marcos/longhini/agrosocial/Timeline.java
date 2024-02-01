@@ -6,8 +6,10 @@ public class Timeline {
     private String dt;
     private String imagem64;
 
+    private String doc;
 
-    public Timeline(String nome, String mensagem, String dt, String imagem64) {
+    public Timeline(String doc, String nome, String mensagem, String dt, String imagem64) {
+        this.doc = doc;
         this.nome = nome;
         this.mensagem = mensagem;
         this.dt = dt;
@@ -44,5 +46,12 @@ public class Timeline {
 
     public void setImagem64(String imagem64) {
         this.imagem64 = imagem64;
+    }
+
+    public String getDoc() {     return doc;
+    }
+
+    public void setDoc(String doc) {
+        this.doc = doc;
     }
 }

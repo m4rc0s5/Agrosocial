@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -20,6 +21,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -44,7 +46,7 @@ public class NovaMsgActivity extends AppCompatActivity {
     private EditText txtMsg;
     private ArrayAdapter adapter;
     private List<String> dataList;
-    private String nome, email, telefone, imagemBase64;
+    private String nome, email, telefone, imagemBase64, headerName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,15 +62,6 @@ public class NovaMsgActivity extends AppCompatActivity {
         telefone = sharedPreferences.getString("key_telefone", "anônimo");
         imagemBase64 = sharedPreferences.getString("key_imagem", "null");
 
-        //if (!imagemBase64.equals("null")) {
-        //    Drawable drawable = getResources().getDrawable(R.drawable.ic_icone);
-        //    if (drawable instanceof BitmapDrawable) {
-        //        // Converte imagem Drawable para Bitmap
-        //        Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
-        //        // Converte  Bitmap em string Base64
-       //         imagemBase64 = Ferramentas.encodeToBase64(bitmap);
-       //     }
-        //}
         dataList = new ArrayList<>();
         adapter = new ArrayAdapter(this, R.layout.simple_list_item, dataList);
         spinner.setAdapter(adapter);

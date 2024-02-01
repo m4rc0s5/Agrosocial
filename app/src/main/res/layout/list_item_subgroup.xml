@@ -21,6 +21,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:orientation="vertical">
 
             <TextView
@@ -43,8 +44,32 @@
 
         </LinearLayout>
 
+        <ImageButton
+            android:id="@+id/btnDelete"
+            android:backgroundTint="#0FFF"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_delete"/>
+
+        <ImageButton
+            android:id="@+id/btnReply"
+            android:backgroundTint="#0FFF"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_reply"/>
+
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/txtDocument"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:textSize="18dp" />
 
 
     <TextView

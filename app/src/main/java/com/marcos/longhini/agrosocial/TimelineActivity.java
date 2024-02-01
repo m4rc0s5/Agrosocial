@@ -11,21 +11,30 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.ContextMenu;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
@@ -36,6 +45,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -47,16 +57,21 @@ import java.util.Map;
 public class TimelineActivity extends AppCompatActivity {
 
     private ExpandableListView expandableListView;
-    private ExpandableListAdapter expandableListAdapter;
     private List<String> listDataHeader;
     //private HashMap<String, List<String>> listDataChild;
     private Map<String, List<Timeline>> listDataChild;// = new ArrayList<>();
-    ExpandableListAdapter listAdapter;
+    String headerName = "";
+    FirebaseDatabase database;
+    FirebaseFirestore store;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timeline);
+
+
+        database = FirebaseDatabase.getInstance();
+        store = FirebaseFirestore.getInstance();
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -77,18 +92,26 @@ public class TimelineActivity extends AppCompatActivity {
             showNoInternetAlert();
         }
 
-    }
+        expandableListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+            @Override
+            public boolean onGroupClick(ExpandableListView expandableListView, View view, int i, long l) {
+                if (listDataHeader != null) {
+                    headerName = listDataHeader.get(i);
+                    //Ferramentas.mensagem_Tela(TimelineActivity.this, headerName);
+                }
+                return false;
+            }
+        });
 
+    }
 
     private void prepareListAreas() {
         listDataHeader = new ArrayList<>();
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference dataListRef = database.getReference("area_agricola");
         dataListRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
                 listDataHeader.clear();
                 for (DataSnapshot areaSnapshot : dataSnapshot.getChildren()) {
                     String value = areaSnapshot.getValue(String.class);
@@ -107,28 +130,26 @@ public class TimelineActivity extends AppCompatActivity {
 
     private void prepareListData() {
         listDataChild = new HashMap<>();
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         for (String collectionPath : listDataHeader) {
-            db.collection(collectionPath)
+            store.collection(collectionPath)
+                    .orderBy("data", Query.Direction.DESCENDING)
                     .get()
                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
                             if (task.isSuccessful()) {
-
                                 List<Timeline> childItemList = new ArrayList<>();
-
                                 for (DocumentSnapshot document : task.getResult()) {
                                     // Get the document data as a Map
                                     Map<String, Object> data = document.getData();
-
                                     if (data != null) {
                                         // Iterate through the fields in the document
                                         String nome = "";
                                         String dt = "";
                                         String mensagem = "";
                                         String imagem = "";
+                                        String doc = document.getId();
                                         for (Map.Entry<String, Object> entry : data.entrySet()) {
                                             String fieldName = entry.getKey();
                                             Object fieldValue = entry.getValue();
@@ -148,7 +169,7 @@ public class TimelineActivity extends AppCompatActivity {
                                             // Log or process the field name and value
                                             Log.d("TAG", "Field Name: " + fieldName + ", Field Value: " + fieldValue);
                                         }
-                                        Timeline childItem = new Timeline(nome, mensagem, dt, imagem);
+                                        Timeline childItem = new Timeline(doc, nome, mensagem, dt, imagem);
                                         childItemList.add(childItem);
                                     }
                                 }
@@ -229,7 +250,6 @@ public class TimelineActivity extends AppCompatActivity {
             }
         });
         alert.show();
-
     }
 
     private void showNoInternetAlert() {
@@ -247,5 +267,157 @@ public class TimelineActivity extends AppCompatActivity {
         builder.setCancelable(false);
         builder.show();
     }
+
+
+
+
+
+
+    class CustomListAdapter extends BaseExpandableListAdapter {
+
+        private Context _context;
+        private List<String> _listDataHeader; // header titles
+        // child data in format of header title, child title
+        private Map<String, List<Timeline>> _listDataChild;
+
+        public CustomListAdapter(Context context, List<String> listDataHeader, Map<String, List<Timeline>> listChildData) {
+            this._context = context;
+            this._listDataHeader = listDataHeader;
+            this._listDataChild = listChildData;
+        }
+
+        @Override
+        public long getChildId(int groupPosition, int childPosition) {
+            return childPosition;
+        }
+
+        @Override
+        public View getChildView(int groupPosition, final int childPosition,
+                                 boolean isLastChild, View convertView, ViewGroup parent) {
+
+            Timeline childItem = (Timeline) getChild(groupPosition, childPosition);
+
+            if (convertView == null) {
+                LayoutInflater infalInflater = (LayoutInflater) this._context
+                        .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                convertView = infalInflater.inflate(R.layout.list_item_subgroup, null);
+            }
+
+            TextView txtChildName = convertView.findViewById(R.id.txtNome);
+            TextView txtChildDt = convertView.findViewById(R.id.txtDt);
+            TextView txtChildMessage = convertView.findViewById(R.id.txtMensagem);
+            ImageView imgChildImage = convertView.findViewById(R.id.imgFoto);
+            TextView txtChildDoc = convertView.findViewById(R.id.txtDocument);
+
+            txtChildDoc.setText(childItem.getDoc());
+            txtChildName.setText(childItem.getNome());
+            txtChildDt.setText(childItem.getDt());
+            txtChildMessage.setText(childItem.getMensagem());
+            String img64 = childItem.getImagem64();
+            if (!img64.equals("null")) {
+                Bitmap bmp = Ferramentas.decodeFromBase64(img64);
+                imgChildImage.setImageBitmap(bmp);
+            }
+
+            if (childPosition % 2 == 0) {
+                convertView.setBackgroundColor(Color.parseColor("#EEFFEE"));
+            }
+
+            String usuario = txtChildName.getText().toString();
+            String documentId = txtChildDoc.getText().toString();
+            ImageButton imgDel = convertView.findViewById(R.id.btnDelete);
+            ImageButton imgReply = convertView.findViewById(R.id.btnReply);
+            SharedPreferences sharedPreferences = _context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+            String nome = sharedPreferences.getString("key_nome", "anônimo");
+
+            imgDel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (nome.equals(usuario)) {
+                        //Ferramentas.mensagem_Tela(_context, headerName +"\n"+documentId);
+                        store.collection(headerName)
+                                .document(documentId)
+                                .delete()
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        Ferramentas.mensagem_Tela(_context, "Mensagem excluída!");
+                                        prepareListAreas();
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                    }
+                                });
+                    }
+                    else {
+                        Ferramentas.mensagem_Tela(_context, "Somente mensagens de sua autoria podem ser excluídas!");
+                    }
+                }
+            });
+            imgReply.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(TimelineActivity.this, NovaMsgActivity.class);
+                    startActivity(intent);
+                }
+            });
+
+            return convertView;
+        }
+
+        @Override
+        public Object getGroup(int groupPosition) {
+            return this._listDataHeader.get(groupPosition);
+        }
+
+        @Override
+        public Object getChild(int groupPosition, int childPosition) {
+            return _listDataChild.get(_listDataHeader.get(groupPosition)).get(childPosition);
+        }
+
+        @Override
+        public int getGroupCount() {
+            return this._listDataHeader.size();
+        }
+
+        @Override
+        public int getChildrenCount(int groupPosition) {
+            return _listDataChild.get(_listDataHeader.get(groupPosition)).size();
+        }
+
+        @Override
+        public long getGroupId(int groupPosition) {
+            return groupPosition;
+        }
+
+        @Override
+        public View getGroupView(int groupPosition, boolean isExpanded,
+                                 View convertView, ViewGroup parent) {
+            String headerTitle = (String) getGroup(groupPosition);
+            if (convertView == null) {
+                LayoutInflater infalInflater = (LayoutInflater) this._context
+                        .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                convertView = infalInflater.inflate(R.layout.list_item_group, null);
+            }
+
+            TextView lblListHeader = (TextView) convertView.findViewById(R.id.txtArea);
+            lblListHeader.setText(headerTitle);
+
+            return convertView;
+        }
+
+        @Override
+        public boolean hasStableIds() {
+            return false;
+        }
+
+        @Override
+        public boolean isChildSelectable(int groupPosition, int childPosition) {
+            return true;
+        }
+    }
+
 
 }

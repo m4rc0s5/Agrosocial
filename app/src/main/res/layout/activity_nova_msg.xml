@@ -27,11 +27,13 @@
             android:text="Selecionar Área Agricola"
             android:textSize="20sp" />
 
+
         <Spinner
             android:id="@+id/spArea"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/green_dark" />
+
 
         <TextView
             android:layout_width="match_parent"
