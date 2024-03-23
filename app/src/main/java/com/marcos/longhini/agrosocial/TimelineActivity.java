@@ -296,18 +296,18 @@ public class TimelineActivity extends AppCompatActivity {
             TextView txtChildName = convertView.findViewById(R.id.txtNome);
             TextView txtChildDt = convertView.findViewById(R.id.txtDt);
             TextView txtChildMessage = convertView.findViewById(R.id.txtMensagem);
-            ImageView imgChildImage = convertView.findViewById(R.id.imgFoto);
+            //ImageView imgChildImage = convertView.findViewById(R.id.imgFoto);
             TextView txtChildDoc = convertView.findViewById(R.id.txtDocument);
 
             txtChildDoc.setText(childItem.getDoc());
             txtChildName.setText(childItem.getNome());
             txtChildDt.setText(childItem.getDt());
             txtChildMessage.setText(childItem.getMensagem());
-            String img64 = childItem.getImagem64();
-            if (!img64.equals("null")) {
-                Bitmap bmp = Ferramentas.decodeFromBase64(img64);
-                imgChildImage.setImageBitmap(bmp);
-            }
+            //String img64 = childItem.getImagem64();
+            //if (!img64.equals("null")) {
+            //    Bitmap bmp = Ferramentas.decodeFromBase64(img64);
+            //    imgChildImage.setImageBitmap(bmp);
+            //}
 
             if (childPosition % 2 == 0) {
                 convertView.setBackgroundColor(Color.parseColor("#EEFFEE"));
